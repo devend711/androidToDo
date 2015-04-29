@@ -7,4 +7,7 @@
     <string name="action_new">+</string>
     <string name="action_refresh">Refresh</string>
     <string name="title_activity_edit_todo">Add/Edit</string>
+    <string name="todo_title_hint">What do you have to do?</string>
+    <string name="save_todo_button">Save</string>
+    <string name="title_activity_edit_note">Add/Edit Todo</string>
 </resources>
