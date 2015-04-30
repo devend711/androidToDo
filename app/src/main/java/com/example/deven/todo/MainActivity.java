@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.Parse;
@@ -46,12 +47,27 @@ public class MainActivity extends ListActivity {
         refreshTodos();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshTodos();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        Todo todo = todos.get(position);
+        Intent intent = new Intent(this, EditTodoActivity.class);
+        intent.putExtra("todoId", todo.getId());
+        intent.putExtra("todoContent", todo.getContent());
+        intent.putExtra("todoDone", todo.isDone());
+        startActivity(intent);
     }
 
     @Override
@@ -98,11 +114,9 @@ public class MainActivity extends ListActivity {
                     for (ParseObject todo : todoList) {
                         Todo newTodo = new Todo(todo.getObjectId(), todo.getString("content"), todo.getBoolean("done"));
                         todos.add(newTodo);
-                        Log.e("info", "added a todo!");
                     }
                     ((ArrayAdapter<Todo>) getListAdapter()).notifyDataSetChanged();
                     setProgressBarIndeterminateVisibility(false); // stop spinner
-                    Log.e("info", String.valueOf(todos.size()) + " todos total");
                 } else {
                     Log.d(getClass().getSimpleName(), "Error: " + e.getMessage());
                 }

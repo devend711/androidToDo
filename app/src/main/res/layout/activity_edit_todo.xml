@@ -4,17 +4,28 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <EditText
-        android:id="@+id/noteTitle"
+        android:id="@+id/todoContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/todo_title_hint" />
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/todo_done_checkbox"
+        android:id="@+id/todoDone"
+        android:textSize="25dp"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        android:clickable="true" />
+
     <Button
-        android:id="@+id/saveNote"
+        android:id="@+id/saveTodoButton"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

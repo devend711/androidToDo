@@ -25,9 +25,9 @@ public class TodoAdapter extends ArrayAdapter<Todo> {
         View view = super.getView(position, convertView, parent);
         Todo todo = todos.get(position);
         if (todo.isDone()) {
-            view.setBackgroundColor(Color.rgb(0,168,83)); // green
+            view.setBackgroundColor(Color.rgb(0,168,83)); // green  bg if done
         } else {
-            view.setBackgroundColor(Color.rgb(231,120,0));
+            view.setBackgroundColor(Color.rgb(231,120,0)); // organge bg if todo
         }
         return view;
     }

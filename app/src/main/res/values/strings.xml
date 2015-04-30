@@ -10,4 +10,9 @@
     <string name="todo_title_hint">What do you have to do?</string>
     <string name="save_todo_button">Save</string>
     <string name="title_activity_edit_note">Add/Edit Todo</string>
+    <string name="todo_done_checkbox">Done?</string>
+    <string name="empty_todo_content_title">Whoops!</string>
+    <string name="empty_todo_content_message">The content of your task can\'t be empty</string>
+    <string name="add_todo_activity_title">Add Task</string>
+    <string name="edit_todo_activity_title">Update Task</string>
 </resources>
