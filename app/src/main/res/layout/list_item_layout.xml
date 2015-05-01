@@ -6,5 +6,6 @@
     android:padding="5dp"
     android:singleLine="true"
     android:textSize="20sp"
+    android:textColor="@color/whiteText"
     android:ellipsize="end">
 </TextView>

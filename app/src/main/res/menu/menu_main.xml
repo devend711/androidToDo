@@ -14,4 +14,10 @@
         android:showAsAction="always|withText"
         android:title="@string/action_new">
     </item>
+
+    <item
+        android:id="@+id/action_logout"
+        android:showAsAction="always|withText"
+        android:title="@string/logout_label">
+    </item>
 </menu>

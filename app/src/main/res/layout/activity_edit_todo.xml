@@ -5,13 +5,17 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:textColor="@color/whiteText"
+    android:background="@color/mainBackground">
 
     <EditText
         android:id="@+id/todoContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:textColor="@color/whiteText"
+
         android:hint="@string/todo_title_hint" />
 
     <CheckBox
@@ -20,6 +24,7 @@
         android:text="@string/todo_done_checkbox"
         android:id="@+id/todoDone"
         android:textSize="25dp"
+        android:textColor="@color/whiteText"
         android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal"
         android:clickable="true" />
@@ -30,5 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
+        android:textColor="@color/whiteText"
         android:text="@string/save_todo_button" />
 </LinearLayout>

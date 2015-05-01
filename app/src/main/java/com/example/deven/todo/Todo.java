@@ -9,6 +9,7 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 /**
@@ -74,6 +75,7 @@ public class Todo {
         final ParseObject newTodo = new ParseObject("Todo");
         newTodo.put("content", newContent);
         newTodo.put("done", newDone);
+        newTodo.put("author", ParseUser.getCurrentUser());
         activity.setProgressBarIndeterminateVisibility(true);
         newTodo.saveInBackground(new SaveCallback() {
             @Override
@@ -98,6 +100,7 @@ public class Todo {
                 if (e == null) {
                     todo.put("content", newContent);
                     todo.put("done", newDone);
+                    todo.put("author", ParseUser.getCurrentUser());
                     activity.setProgressBarIndeterminateVisibility(true);
                     todo.saveInBackground(new SaveCallback() {
                         @Override

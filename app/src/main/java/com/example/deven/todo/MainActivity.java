@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,11 @@ public class MainActivity extends ListActivity {
 
         Parse.initialize(this, "1AWLZWMg7EDT01XdQGkjKfuLdd6djw5ZU6yCdXhU", "xN0BbK8Nn4z669j5Wd8kMhZk1HkjHWrinOK0EeCX");
         // ParseAnalytics.trackAppOpened(getIntent());
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser == null) {
+            loadLoginView();
+        }
 
         todos = new ArrayList<Todo>();
         adapter = new TodoAdapter(this, R.layout.list_item_layout, todos); // Todo.toString() -> each row
@@ -91,6 +98,11 @@ public class MainActivity extends ListActivity {
                 // Do something when user selects Settings from Action Bar overlay
                 break;
             }
+            case R.id.action_logout: {
+                ParseUser.logOut();
+                loadLoginView();
+                break;
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -100,6 +112,7 @@ public class MainActivity extends ListActivity {
         Log.e("alert","refreshing todos!");
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Todo");
+        query.whereEqualTo("author", ParseUser.getCurrentUser());
 
         setProgressBarIndeterminateVisibility(true); // start spinner
 
@@ -123,4 +136,12 @@ public class MainActivity extends ListActivity {
             }
         });
     }
+
+    private void loadLoginView() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
 }

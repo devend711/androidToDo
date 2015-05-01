@@ -15,4 +15,17 @@
     <string name="empty_todo_content_message">The content of your task can\'t be empty</string>
     <string name="add_todo_activity_title">Add Task</string>
     <string name="edit_todo_activity_title">Update Task</string>
+    <string name="title_activity_login">Login</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button_label">Login</string>
+    <string name="sign_up_text">Sign Up</string>
+    <string name="title_activity_sign_up">Sign Up</string>
+    <string name="email_hint">Email</string>
+    <string name="sign_up_button_label">Sign Up</string>
+    <string name="login_error_message">Login error!</string>
+    <string name="login_error_title">Whoops!</string>
+    <string name="signup_error_message">Sign Up Error!</string>
+    <string name="signup_error_title">Whoops!</string>
+    <string name="logout_label">Logout</string>
 </resources>
