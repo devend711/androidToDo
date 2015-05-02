@@ -93,18 +93,12 @@ public class SignUpActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+
+        if (id == android.R.id.home) {
+            onBackPressed();
             return true;
         }
+
         return super.onOptionsItemSelected(item);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.sign_up, menu);
-        getMenuInflater().inflate(R.menu.sign_up, menu);
-        return true;
     }
 }

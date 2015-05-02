@@ -2,4 +2,7 @@
 <resources>
     <color name="mainBackground">#222222</color>
     <color name="whiteText">#E3E3E3</color>
+    <color name="blue">#006fe7</color>
+    <color name="green">#00A853</color>
+    <color name="orange">#e77800</color>
 </resources>

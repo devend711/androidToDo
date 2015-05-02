@@ -28,4 +28,8 @@
     <string name="signup_error_message">Sign Up Error!</string>
     <string name="signup_error_title">Whoops!</string>
     <string name="logout_label">Logout</string>
+    <string name="action_help">Help</string>
+    <string name="title_activity_help">Help</string>
+    <string name="help_description">Add your tasks! Hold a task to toggle it from either done or todo, or click a task to edit it.</string>
+    <string name="delete_todo_button">Delete</string>
 </resources>

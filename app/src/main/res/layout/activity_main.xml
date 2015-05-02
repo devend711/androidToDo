@@ -1,14 +1,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/mainBackground">
+    android:background="@color/mainBackground"
+    android:layout_height="fill_parent" >
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="Add Task"
+        android:id="@+id/new_task_button"
+        android:textColor="@color/whiteText"
+        android:background="@color/blue"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="newTodo" />
+    />
 
-    <ListView
-        android:id="@android:id/list"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_alignParentLeft="true">
-    </ListView>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="55dp">
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_height="462dp"
+            android:layout_width="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+        </ListView>
+
+
+    </LinearLayout>
+
+
+
 </RelativeLayout>

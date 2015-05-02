@@ -19,6 +19,7 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 
@@ -28,6 +29,7 @@ public class EditTodoActivity extends Activity {
     private EditText editContent;
     private CheckBox editDone;
     private Button saveButton;
+    private Button deleteButton;
     // store todo data
     private String newContent;
     private Boolean newDone;
@@ -46,20 +48,30 @@ public class EditTodoActivity extends Activity {
         editContent = (EditText) findViewById(R.id.todoContent);
         editDone = (CheckBox) findViewById(R.id.todoDone);
         saveButton = (Button) findViewById(R.id.saveTodoButton);
+        deleteButton = (Button) findViewById(R.id.deleteTodoButton);
 
         alreadyMadeOne = false;
 
         // is this an existing note?
         if (intent.getExtras() != null) {
             getActionBar().setTitle(R.string.edit_todo_activity_title);
+            deleteButton.setActivated(true);
             this.todo = new Todo(intent.getStringExtra("todoId"), intent.getStringExtra("todoContent"), intent.getBooleanExtra("todoDone", false));
             editContent.setText(todo.getContent());
             editDone.setChecked(todo.isDone());
             Log.e("info", "editing an existing note");
         } else {
             getActionBar().setTitle(R.string.add_todo_activity_title);
+            deleteButton.setActivated(false);
             Log.e("info", "creating a new note");
         }
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteTodo();
+            }
+        });
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,15 +98,24 @@ public class EditTodoActivity extends Activity {
         }
     }
 
-    public void setTodo(Todo newTodo) {
-        this.todo = newTodo;
+    private void deleteTodo(){
+        ParseQuery<ParseObject> q = ParseQuery.getQuery("Todo");
+        Log.d("info", "deleting a todo");
+        q.getInBackground(todo.getId(), new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject todo, ParseException e) {
+                if (e == null) {
+                    todo.deleteEventually();
+                    Toast.makeText(getApplicationContext(), "Deleted!", Toast.LENGTH_SHORT).show();
+                } else {
+                   Log.e("error deleting", e.getMessage());
+                }
+            }
+        });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_edit_todo, menu);
-        return true;
+    public void setTodo(Todo newTodo) {
+        this.todo = newTodo;
     }
 
     @Override

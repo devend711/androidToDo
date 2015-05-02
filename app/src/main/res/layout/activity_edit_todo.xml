@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:textColor="@color/whiteText"
-
         android:hint="@string/todo_title_hint" />
 
     <CheckBox
@@ -34,7 +33,16 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:textColor="@color/whiteText"
         android:text="@string/save_todo_button" />
+
+    <Button
+        android:id="@+id/deleteTodoButton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/whiteText"
+        android:text="@string/delete_todo_button" />
 </LinearLayout>

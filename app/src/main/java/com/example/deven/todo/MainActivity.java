@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.parse.FindCallback;
@@ -39,6 +41,7 @@ public class MainActivity extends ListActivity {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
         setContentView(R.layout.activity_main);
+        MenuInflater inflater = getMenuInflater();
 
         Parse.initialize(this, "1AWLZWMg7EDT01XdQGkjKfuLdd6djw5ZU6yCdXhU", "xN0BbK8Nn4z669j5Wd8kMhZk1HkjHWrinOK0EeCX");
         // ParseAnalytics.trackAppOpened(getIntent());
@@ -54,8 +57,14 @@ public class MainActivity extends ListActivity {
         refreshTodos();
     }
 
+    public void newTodo(View view) {
+        Intent intent = new Intent(this, EditTodoActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onResume() {
+        Log.d("info","resumed main!");
         super.onResume();
         refreshTodos();
     }
@@ -63,18 +72,10 @@ public class MainActivity extends ListActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        Log.d("info", "inflating menu!");
+        super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
-
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        Todo todo = todos.get(position);
-        Intent intent = new Intent(this, EditTodoActivity.class);
-        intent.putExtra("todoId", todo.getId());
-        intent.putExtra("todoContent", todo.getContent());
-        intent.putExtra("todoDone", todo.isDone());
-        startActivity(intent);
     }
 
     @Override
@@ -89,13 +90,9 @@ public class MainActivity extends ListActivity {
                 refreshTodos();
                 break;
             }
-            case R.id.action_new: {
-                Intent intent = new Intent(this, EditTodoActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.action_settings: {
+            case R.id.action_help: {
                 // Do something when user selects Settings from Action Bar overlay
+                loadHelpView();
                 break;
             }
             case R.id.action_logout: {
@@ -108,7 +105,7 @@ public class MainActivity extends ListActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void refreshTodos() {
+    public void refreshTodos() {
         Log.e("alert","refreshing todos!");
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Todo");
@@ -139,6 +136,13 @@ public class MainActivity extends ListActivity {
 
     private void loadLoginView() {
         Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    private void loadHelpView() {
+        Intent intent = new Intent(this, HelpActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
