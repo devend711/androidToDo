@@ -14,6 +14,7 @@ import com.facebook.rebound.Spring;
 import com.facebook.rebound.SpringListener;
 import com.facebook.rebound.SpringSystem;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,12 +62,21 @@ public class TodoAdapter extends ArrayAdapter<Todo> {
             public boolean onLongClick(final View view) {
                 toggleTodo(position);
                 Todo todo = todos.get(position);
-                Todo.editInParse(todo.getId(), todo.getContent(), todo.isDone(), (MainActivity)getContext());
-                Toast.makeText(getContext().getApplicationContext(), "Saved!", Toast.LENGTH_SHORT).show();
+                Todo.editInParse(todo.getId(), todo.getContent(), todo.isDone(), (MainActivity)getContext(), false);
+                if (todo.isDone()) {
+                    Toast.makeText(getContext().getApplicationContext(), randomSuccessMessage(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext().getApplicationContext(), "Saved!", Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
         });
         return view;
+    }
+
+    private String randomSuccessMessage() {
+        String[] messages = {"Nice!", "Wahoo!", "Way to go!"};
+        return messages[(int) (Math.random() * messages.length)];
     }
 
     private void toggleTodo(Integer position) {

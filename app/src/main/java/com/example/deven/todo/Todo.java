@@ -92,7 +92,7 @@ public class Todo {
         });
     }
 
-    public static void editInParse(String todoId, final String newContent, final Boolean newDone, final Activity activity) {
+    public static void editInParse(String todoId, final String newContent, final Boolean newDone, final Activity activity, final boolean showToast) {
         ParseQuery<ParseObject> q = ParseQuery.getQuery("Todo");
         q.getInBackground(todoId, new GetCallback<ParseObject>() {
             @Override
@@ -106,10 +106,12 @@ public class Todo {
                         @Override
                         public void done(ParseException e) {
                             activity.setProgressBarIndeterminateVisibility(false);
-                            if (e == null) {
-                                Toast.makeText( activity.getApplicationContext(), "Saved!", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText( activity.getApplicationContext(), "Couldn't save task", Toast.LENGTH_SHORT).show();
+                            if (showToast) {
+                                if (e == null) {
+                                    Toast.makeText( activity.getApplicationContext(), "Saved!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText( activity.getApplicationContext(), "Couldn't save task", Toast.LENGTH_SHORT).show();
+                                }
                             }
                             //success = true;
                         }

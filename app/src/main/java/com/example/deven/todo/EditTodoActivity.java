@@ -91,7 +91,7 @@ public class EditTodoActivity extends Activity {
                 alreadyMadeOne = true;
                 Todo.buildForParse(newContent, newDone, this);
             } else { // we're editing this.todo
-                Todo.editInParse(todo.getId(), newContent, newDone, this);
+                Todo.editInParse(todo.getId(), newContent, newDone, this, true);
             }
         } else { // newContent was empty
             Toast.makeText(getApplicationContext(), "Add a description!", Toast.LENGTH_SHORT).show();
